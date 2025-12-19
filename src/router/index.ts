@@ -1,3 +1,4 @@
+import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Pedidos from '../views/Pedidos.vue'
 import Registrar from '../views/Registrar.vue'
@@ -8,7 +9,8 @@ const router = createRouter({
   routes: [
     {path: '/pedidos', component: Pedidos},
     {path: '/login', component: Login},
-    {path: '/register', component: Registrar}
+    {path: '/register', component: Registrar},
+    {path: '/', component: Home}
   ],
 })
 

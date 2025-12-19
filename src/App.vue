@@ -25,15 +25,12 @@ import Pedidos from './components/Pedido.vue'
 </template>
 
 <style>
-  *{
-    color: #333
-  }
   header{
     display: flex;
     justify-content: space-around;
     gap: 16px;
     align-items: center;
-    background-color: #dedede;
+    background: linear-gradient(45deg, #333333, #000000);
     width: 100%;
     padding: 8px;
   }
@@ -41,11 +38,15 @@ import Pedidos from './components/Pedido.vue'
   nav{
     width: 80%;
     display: flex;
-    gap: 8px;
+    gap: 16px;
   }
 
   a{
     text-decoration: none;
     font-weight: 600;
+    color: #ffffff;
+  }
+  a:hover{
+    color: rgb(220, 255, 255);
   }
 </style>

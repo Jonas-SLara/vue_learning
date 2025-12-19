@@ -1,9 +1,12 @@
 <template>
-  <h4>{{ title }}</h4>
+  <h4>{{ title }} | {{ statusP }} | {{ created }}</h4>
 </template>
 
 <script setup lang="ts">
-defineProps(['title'])
+defineProps(['title', 'created', 'statusP'])
+
 </script>
 
-<style></style>
+<style>
+  
+</style>
