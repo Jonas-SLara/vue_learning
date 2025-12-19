@@ -22,8 +22,11 @@ const decrement = () => {
 .btn {
   background-color: #333;
   color: #fff;
-  border-radius: 16px;
-  padding: 8px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  padding: 4px;
+  min-width: 30px;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 </style>

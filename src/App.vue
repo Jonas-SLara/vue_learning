@@ -2,28 +2,50 @@
 import { RouterLink, RouterView } from 'vue-router'
 import ButtonCounter from './components/ButtonCounter.vue'
 import { ref } from 'vue'
-import Pedidos from './components/Pedidos.vue'
+import Pedidos from './components/Pedido.vue'
 
-const posts = ref([
-  { id: 1, title: 'Pedido 1' },
-  { id: 2, title: 'Pedido 2' },
-  { id: 3, title: 'Pedido 3' },
-])
+
+
 </script>
 
 <template>
   <header>
-    <div>
+      <div>
+        <img src="/src/assets/logo.svg" width="32px"/>
+      </div>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/pedidos">Pedidos</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/register">Registrar</RouterLink>
       </nav>
-    </div>
   </header>
-
-  <ButtonCounter />
-  <Pedidos v-for="post in posts" :key="post.id" :title="post.title" />
+ 
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+  *{
+    color: #333
+  }
+  header{
+    display: flex;
+    justify-content: space-around;
+    gap: 16px;
+    align-items: center;
+    background-color: #dedede;
+    width: 100%;
+    padding: 8px;
+  }
+
+  nav{
+    width: 80%;
+    display: flex;
+    gap: 8px;
+  }
+
+  a{
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>
