@@ -5,6 +5,7 @@
             <span>HOME</span>
         </RouterLink>
         <div class="menu_links">
+            <RouterLink to="/login">LOGIN</RouterLink>
             <RouterLink to="/about">SOBRE</RouterLink>
             <RouterLink to="/pedidos">PEDIDOS</RouterLink>
         </div>

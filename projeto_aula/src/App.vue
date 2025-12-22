@@ -44,6 +44,28 @@
     text-shadow: #fff 0px 0px 2px;
   }
 
+  form{
+        margin: auto;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        border: #fff solid 2px;
+        border-radius: 16px;
+        padding: 8px;
+        margin: 16px auto;
+  }
+  .input_container{
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+        width: 100%;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #fff;
+        margin: 8px 0;
+        align-items: center;
+  }
+
   .info_box{
     background-color: #650101aa;
     width: 50%;
