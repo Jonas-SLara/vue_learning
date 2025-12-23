@@ -1,6 +1,7 @@
 <template>
     <Main>
         <div class="info_box">
+            <h2>Fazer Login</h2>
             <form id="form_login" >
                 <div class="input_container">
                     <label for="nome">Nome do Cliente: *</label>
