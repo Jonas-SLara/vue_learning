@@ -1,21 +1,20 @@
 <template>
     <form 
         id="form_food_register"
-        @submit.prevent="" 
+        @submit.prevent="handleSubmit()" 
         class="form">
 
         <div class="input_container">
             <label for="nome">Nome: </label>
-            <input id="nome" :value="nome" />
+            <input id="nome" v-model="form.nome"/>
         </div>
 
         <div class="input_container">
             <label for="pao">Escolha Seu Pão: </label>
-            <select>
+            <select v-model="form.pao">
                 <option 
                     v-for="(pao, index) in paes"
                     :key="index"
-                    :value="pao.name"
                 >
                     {{ pao.name }}
                 </option>
@@ -24,7 +23,7 @@
 
         <div class="input_container">
             <label for="carne">Escolha Sua Carne: </label>
-            <select>
+            <select v-model="form.carne">
                 <option
                     v-for="(carne, index) in carnes"
                     :key="index"
@@ -35,6 +34,19 @@
             </select>
         </div>
 
+        
+        <section class="opcionais_box">
+            <h4>Escolha Os seus Complementos</h4>
+            <div v-for="(opcional, index) in opcionais" :key="index">
+                <input 
+                    type="checkbox"
+                    :value="opcional.name"
+                    v-model="form.opcional"
+                />
+                <span>{{ opcional.name }}</span>
+            </div>
+        </section>
+       
         <div>
             <input type="submit" value="SUBMIT" class="submit" />
         </div>
@@ -46,12 +58,11 @@ import { getIngredients } from '@/service/IgredientsService';
 import { IngredientType, type Ingrediente } from '@/types/interfaces/Ingredientes';
 import { onMounted, reactive, ref } from 'vue';
 
-    const nome = ref("")
-
     const form = reactive({
-        carne: String,
-        pao: String,
-        opcional: String
+        nome: '',
+        carne: '',
+        pao: '',
+        opcional: []
     })
 
     const carnes = ref<Ingrediente[]>([])
@@ -66,7 +77,7 @@ import { onMounted, reactive, ref } from 'vue';
     })
     
     function handleSubmit(){
-
+        alert(`Olá ${form.nome} seu X com ${form.pao}, ${form.carne}, ${form.opcional}`)
     }
 
 </script>
@@ -89,16 +100,32 @@ import { onMounted, reactive, ref } from 'vue';
     }
 
     .form .input_container input,
-    .form .input_container select{
+    select{
         width: 300px;
         padding: 4px;
         color: #000;
         font-size: 1rem;
     }
 
+    option{
+        color: #000;
+    }
+
     .form label{
         font-size: 1.1rem;
         font-weight: 500;
+    }
+
+    .opcionais_box{
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        gap: 16px;
+    }
+
+    .opcionais_box h4{
+        width: 100%;
     }
 
     .submit{
@@ -109,7 +136,10 @@ import { onMounted, reactive, ref } from 'vue';
         width: 100px; 
         padding: 8px;
         border-radius: 16px;
+        margin: 16px 0;
+        float: right;
     }
+
 
     .submit:hover{
         box-shadow: #ff5521 0 0 10px;
