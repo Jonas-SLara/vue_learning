@@ -15,6 +15,7 @@
                 <option 
                     v-for="(pao, index) in paes"
                     :key="index"
+                    :value="pao.name"
                 >
                     {{ pao.name }}
                 </option>
@@ -55,7 +56,10 @@
 
 <script setup lang="ts">
 import { getIngredients } from '@/service/IgredientsService';
+import { OrderService } from '@/service/OrdersService';
 import { IngredientType, type Ingrediente } from '@/types/interfaces/Ingredientes';
+import { OrderPriority, OrderStatus, type Order } from '@/types/interfaces/Orders';
+
 import { onMounted, reactive, ref } from 'vue';
 
     const form = reactive({
@@ -77,7 +81,19 @@ import { onMounted, reactive, ref } from 'vue';
     })
     
     function handleSubmit(){
-        alert(`Olá ${form.nome} seu X com ${form.pao}, ${form.carne}, ${form.opcional}`)
+       
+        const order: Order = {
+            status: OrderStatus.PENDENTE,
+            clientName: form.nome,
+            pao: form.pao,
+            carne: form.carne,
+            opcionais: form.opcional,
+            priority: OrderPriority.MEDIA,
+            id: 0
+        }
+
+        OrderService.saveOrder(order)
+        OrderService.printOrder(order)
     }
 
 </script>
