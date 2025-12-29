@@ -1,7 +1,8 @@
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Pedidos from '../views/Pedidos.vue'
-import Registrar from '../views/Registrar.vue'
+
+import Home from '@/views/home/Home.vue'
+import Login from '@/views/login/Login.vue'
+import Pedidos from '@/views/pedidos/Pedidos.vue'
+import Registrar from '@/views/registrar/Registrar.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({

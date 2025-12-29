@@ -14,20 +14,19 @@
         </Info>
 
         <Info v-if="isactive">
-            <FormRegisterFood>
-
-            </FormRegisterFood>
+            <FormRegisterFood/>
         </Info>
     </Main>
     
 </template>
 
 <script setup lang="ts">
-    import Info from '../components/Info.vue';
-    import Main from '../components/Main.vue';
-    import Button from '../components/Button.vue';
+    import Info from '../../components/Info.vue';
+    import Main from '../../components/Main.vue';
+    import Button from './components/Button.vue';
     import { ref } from 'vue';
-    import FormRegisterFood from '@/components/FormRegisterFood.vue';
+    import FormRegisterFood from './components/FormRegisterFood.vue';
+    
 
     const isactive = ref(false)
     const text = ref("Escolha seu X")

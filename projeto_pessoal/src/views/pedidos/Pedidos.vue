@@ -2,7 +2,7 @@
     <Main>
         <Info>
             <h2>Lista de Pedidos</h2>
-            <TablePedidos 
+            <TablePedidos
                 :orders="orders"
                 @cancel-order="loadOrders()"
             />
@@ -11,12 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import Main from '../components/Main.vue';
-import Info from '../components/Info.vue';
-import TablePedidos from '@/components/TablePedidos.vue';
+import Main from '../../components/Main.vue';
+import Info from '../../components/Info.vue';
+
 import { onMounted, ref } from 'vue';
 import type { Order } from '@/types/interfaces/Orders';
 import { OrderService } from '@/service/OrdersService';
+import TablePedidos from './components/TablePedidos.vue';
 
 const orders = ref<Order[]>([])
 
