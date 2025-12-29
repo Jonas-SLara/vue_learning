@@ -21,7 +21,10 @@
                 </td>
                 <td>{{ order.status }}</td>
                 <td>
-                    <button class="edit-btn">Editar</button>
+                    <button
+                         class="edit-btn"
+                        @click="editOrderModal(order)"
+                    >Editar</button>
                 </td>
                 <td>
                     <button 
@@ -43,11 +46,16 @@ import type { Order } from '@/types/interfaces/Orders';
         orders: Order[]
     }>()
 
-    const emit = defineEmits(['cancelOrder'])
+    const emit = defineEmits(['cancelOrder', 'editOrder'])
 
     const cancelOrder = (id:number)=>{
+        alert("tens certeza");
         OrderService.deletOrder(id);
         emit('cancelOrder');
+    }
+
+    const editOrderModal = (order: Order)=>{
+        emit('editOrder', order)
     }
 
 </script>
