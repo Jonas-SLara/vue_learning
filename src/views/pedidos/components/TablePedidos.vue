@@ -46,16 +46,14 @@ import type { Order } from '@/types/interfaces/Orders';
         orders: Order[]
     }>()
 
-    const emit = defineEmits(['cancelOrder', 'editOrder'])
+    const emit = defineEmits(['cancel-order', 'edit-order'])
 
-    const cancelOrder = (id:number)=>{
-        alert("tens certeza");
-        OrderService.deletOrder(id);
-        emit('cancelOrder');
+    const cancelOrder = (id:Number)=>{
+        emit('cancel-order', id);
     }
 
     const editOrderModal = (order: Order)=>{
-        emit('editOrder', order)
+        emit('edit-order', order)
     }
 
 </script>

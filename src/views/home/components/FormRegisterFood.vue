@@ -62,6 +62,8 @@ import { OrderPriority, OrderStatus, type Order } from '@/types/interfaces/Order
 
 import { onMounted, reactive, ref } from 'vue';
 
+    //incicialização de dados do formulario, select com options pre definidas
+
     const form = reactive({
         nome: '',
         carne: '',
@@ -79,11 +81,15 @@ import { onMounted, reactive, ref } from 'vue';
         carnes.value = ingredientes.filter(i => i.type === IngredientType.CARNE);
         opcionais.value = ingredientes.filter(i => i.type === IngredientType.OPCIONAL);
     })
+
+    //tratar submissao de formulario, abrir popup depois
     
     const emit = defineEmits(['cadastrado'])
 
     function handleSubmit(){
        
+        if(!validateForm()) return
+
         const order: Order = {
             status: OrderStatus.PENDENTE,
             clientName: form.nome,
@@ -96,6 +102,19 @@ import { onMounted, reactive, ref } from 'vue';
 
         OrderService.saveOrder(order)
         emit('cadastrado', order)
+    }
+
+    // tratar campos de formulario
+    const validateForm = (): boolean => {
+        if(
+            form.carne.trim() === '' ||
+            form.nome.trim() === '' ||
+            form.pao.trim() === ''
+        ){
+            alert("Preencha todos os campos obrigatórios")
+            return false
+        }
+        return true
     }
 
 </script>

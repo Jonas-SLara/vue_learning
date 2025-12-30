@@ -16,6 +16,9 @@
         <Info v-if="isactive">
             <FormRegisterFood @cadastrado="openModalOk"/>
         </Info>
+        <Info v-else>
+            
+        </Info>
         <AlertModal 
             v-if="isModalOkActive"
             :text="textModal" 

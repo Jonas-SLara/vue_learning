@@ -55,8 +55,6 @@ import { OrderService } from '@/service/OrdersService';
 import { IngredientType, type Ingrediente } from '@/types/interfaces/Ingredientes';
 import { OrderStatus, type Order } from '@/types/interfaces/Orders';
 import { onMounted, reactive, ref, watch } from 'vue';
-import { p } from 'vue-router/dist/router-CWoNjPRp.mjs';
-
 
     const emit = defineEmits(['close', 'update'])
 
