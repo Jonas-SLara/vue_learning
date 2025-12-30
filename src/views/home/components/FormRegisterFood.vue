@@ -121,10 +121,11 @@ import { onMounted, reactive, ref } from 'vue';
 
 <style scoped>
     .form{
-        width: 100%;
+        width: 90%;
         display: flex;
         gap: 4px;
         flex-direction: column;
+        align-items:start;
     }
 
     .form > .input_container{

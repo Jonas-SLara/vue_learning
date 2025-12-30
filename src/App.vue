@@ -42,14 +42,6 @@ onMounted(()=>{
 
 <style lang="css">
 
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: content-box;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
-  }
-
   header{
     display: flex;
     justify-content: space-around;

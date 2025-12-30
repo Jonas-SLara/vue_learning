@@ -25,10 +25,12 @@ import { OrderService } from '@/service/OrdersService'
         emit('close')
     }
 
-    const calcelOrder = (idSelected: number)=>{
-        OrderService.deletOrder(idSelected)
-        emit('update')
-        emit('close')
+    const calcelOrder = (idSelected: number | undefined)=>{
+        if (idSelected !== undefined) {
+            OrderService.deletOrder(idSelected)
+            emit('update')
+            emit('close')
+        }
     }
 
 </script>

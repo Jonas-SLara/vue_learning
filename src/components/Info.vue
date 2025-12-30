@@ -10,7 +10,7 @@
 
 <style scoped>
     .info_box{
-        min-width: 50%;
+        min-width: 70%;
         min-height: 20vh;
         background-color: #1a1a1ad1;
         border: 4px solid #fff;
@@ -21,7 +21,6 @@
         flex-direction: column;
         align-items: center;
         padding: 8px;
-        gap: 16px;
-        
+        gap: 8px;
     }
 </style>

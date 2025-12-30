@@ -1,7 +1,6 @@
 import type { Ingrediente } from "./Ingredientes";
 
 export enum OrderStatus{
-    CONCLUIDO = 'CONCLUIDO',
     FINALIZADO = 'FINALIZADO',
     PENDENTE = 'PENDENTE'
 }

@@ -17,7 +17,9 @@
             <FormRegisterFood @cadastrado="openModalOk"/>
         </Info>
         <Info v-else>
-            
+            <Cardapio>
+
+            </Cardapio>
         </Info>
         <AlertModal 
             v-if="isModalOkActive"
@@ -38,6 +40,7 @@ import FormRegisterFood from './components/FormRegisterFood.vue';
 import AlertModal from '@/components/AlertModal.vue';
 import type { Order } from '@/types/interfaces/Orders';
 import { OrderService } from '@/service/OrdersService';
+import Cardapio from './components/Cardapio.vue';
     
     // aqui eu coloquei os atributos para o botao
     const isactive = ref(false)
@@ -58,7 +61,7 @@ import { OrderService } from '@/service/OrdersService';
     function setActiveButton(){
         isactive.value = !(isactive.value);
         //alert(isactive.value)
-        text.value = (isactive.value)? "Cancelar" : "Escolha Seu X";
+        text.value = (isactive.value)? "Cardapio" : "Escolha Seu X";
     }
 </script>
 

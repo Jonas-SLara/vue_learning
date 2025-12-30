@@ -2,6 +2,13 @@
     <Main>
         <Info>
             <h2>Lista de Pedidos</h2>
+
+            <div class="filtro-opt">
+                <span>PENDENTE</span>
+                <button v-on:click="setFilter()">click</button>
+                <span>FINALIZADOS</span>
+            </div>
+
             <TablePedidos
                 :orders="orders"
                 @edit-order="openModalEdit"
@@ -30,7 +37,7 @@ import Main from '../../components/Main.vue';
 import Info from '../../components/Info.vue';
 
 import { onMounted, ref } from 'vue';
-import type { Order } from '@/types/interfaces/Orders';
+import { OrderStatus, type Order } from '@/types/interfaces/Orders';
 import { OrderService } from '@/service/OrdersService';
 import TablePedidos from './components/TablePedidos.vue';
 import EditOrderModal from './components/EditOrderModal.vue';
@@ -64,8 +71,29 @@ import CancelOrderModal from './components/CancelOrderModal.vue';
         isCancelModalActive.value = true
         idSelected.value = id
     }
+
+    const filtrar = ref(false)
+
+    //para cada pedido pega os pendentes
+    const setFilter = ()=>{
+        orders.value = orders.value.filter((e) =>{
+            e.status === OrderStatus.PENDENTE
+        })
+        orders.value.forEach((e)=>{
+            console.log(e.status)
+        })
+    }
 </script>
 
-<style lang="css">
-    
+<style lang="scss">
+    .filtro-opt{
+        button{
+            background-color: aqua;
+            color:#fff;
+            border: solid 2px #fff;
+            &:hover{
+                background-color: rgb(4, 146, 146);
+            }
+        }
+    }
 </style>
