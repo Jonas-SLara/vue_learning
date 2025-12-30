@@ -6,7 +6,7 @@ const ID_KEY = "orders_id"
 
 export class OrderService{
 
-    static printOrder(order: Order): void{
+    static toString(order: Order): string{
         let carne = order.carne
         let pao = order.pao
         let opcionais = ""
@@ -15,13 +15,14 @@ export class OrderService{
             opcionais += o + ", "
         })
 
-        console.log(`
+        return `
+            cliente: ${order.clientName}
             id: ${order.id}
             carne: ${carne}
             pao: ${pao}
             status: ${order.status}
             opcionais: ${opcionais}
-        `)
+        `
     }
 
     static getAllOrders(): Order[]{

@@ -6,12 +6,28 @@
             <form @submit.prevent="save">
                 <div>
                     <label for="pao">Pao</label>
-                    <input type="text" id="pao" v-model="form.pao">
+                     <select id="pao" v-model="form.pao">
+                        <option 
+                            v-for="(pao, index) in paes"
+                            :key="index"
+                            :value="pao.name"
+                        >
+                            {{ pao.name }}
+                        </option>
+                    </select>
                 </div>
 
                 <div>
                     <label for="carne">Carne</label>
-                    <input id="carne" type="text" v-model="form.carne">
+                    <select id="carne" v-model="form.carne">
+                        <option 
+                            v-for="(carne, index) in carnes"
+                            :key="index"
+                            :value="carne.name"
+                        >
+                            {{ carne.name }}
+                        </option>
+                    </select>
                 </div>
                 
                 <div>
@@ -34,9 +50,12 @@
 </template>
 
 <script setup lang="ts">
+import { getIngredients } from '@/service/IgredientsService';
 import { OrderService } from '@/service/OrdersService';
+import { IngredientType, type Ingrediente } from '@/types/interfaces/Ingredientes';
 import { OrderStatus, type Order } from '@/types/interfaces/Orders';
-import { reactive, watch } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
+import { p } from 'vue-router/dist/router-CWoNjPRp.mjs';
 
 
     const emit = defineEmits(['close', 'update'])
@@ -83,6 +102,19 @@ import { reactive, watch } from 'vue';
         emit('update')
     }
 
+    const carnes = ref<Ingrediente[]>([])
+    const paes = ref<Ingrediente[]>([])
+    const opcionais = ref<Ingrediente[]>([])
+    
+    onMounted(
+        ()=>{
+            const ingredientes = getIngredients();
+            paes.value = ingredientes.filter(i => i.type === IngredientType.PAO);
+            carnes.value = ingredientes.filter(i => i.type === IngredientType.CARNE);
+            opcionais.value = ingredientes.filter(i => i.type === IngredientType.OPCIONAL);
+        }
+    )
+
 </script>
 
 <style lang="scss" scoped>
@@ -128,8 +160,15 @@ import { reactive, watch } from 'vue';
                 width: 80%;
                 display: flex;
                 justify-content: space-between;
-                label, select, input{
+                label, select, input, option{
                     color: #000000;
+                    padding: 4px;
+                }
+            }
+            button{
+                background-color: #ff0000;
+                &:hover{
+                    background-color: #d20000;
                 }
             }
         }

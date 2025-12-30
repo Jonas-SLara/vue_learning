@@ -80,6 +80,8 @@ import { onMounted, reactive, ref } from 'vue';
         opcionais.value = ingredientes.filter(i => i.type === IngredientType.OPCIONAL);
     })
     
+    const emit = defineEmits(['cadastrado'])
+
     function handleSubmit(){
        
         const order: Order = {
@@ -93,14 +95,14 @@ import { onMounted, reactive, ref } from 'vue';
         }
 
         OrderService.saveOrder(order)
-        OrderService.printOrder(order)
+        emit('cadastrado', order)
     }
 
 </script>
 
 <style scoped>
     .form{
-        width: 90%;
+        width: 100%;
         display: flex;
         gap: 4px;
         flex-direction: column;

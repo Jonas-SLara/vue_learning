@@ -12,7 +12,7 @@
     .info_box{
         min-width: 50%;
         min-height: 20vh;
-        background-color: #750c0092;
+        background-color: #1a1a1ad1;
         border: 4px solid #fff;
         box-shadow: #ffffff87 0 0 10px;
         border-radius: 16px;
