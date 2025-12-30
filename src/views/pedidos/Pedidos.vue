@@ -9,7 +9,9 @@
             />
             <EditOrderModal
                 v-if="orderSelected"
+                :order="orderSelected"
                 @close="orderSelected = null"
+                @update="loadOrders()"
             />
         </Info>
     </Main>

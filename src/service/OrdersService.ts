@@ -54,4 +54,15 @@ export class OrderService{
         localStorage.setItem(ID_KEY, String(nextId))
         return nextId
     }
+
+    static putOrder(order:Order): void{
+        const orders: Order[] = this.getAllOrders()
+        const index = orders.findIndex(o => o.id === order.id)
+        if (index === -1) {
+            console.warn(`Pedido com id ${order.id} não encontrado`)
+            return
+        }
+        orders[index] = order
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(orders))
+    }
 }
