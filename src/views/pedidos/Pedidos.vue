@@ -1,16 +1,16 @@
 <template>
     <Main>
         <Info>
-            <h2>Lista de Pedidos</h2>
 
             <div class="filtro-opt">
-                <span>PENDENTE</span>
-                <button v-on:click="setFilter()">click</button>
-                <span>FINALIZADOS</span>
+                <button @click="setFilterPendentes()">Pendentes</button>
+                <button @click="setFilterFinalizados()">Finalizados</button>
             </div>
 
+            <h2>Lista de Pedidos</h2>
+
             <TablePedidos
-                :orders="orders"
+                :orders="ordersFilter"
                 @edit-order="openModalEdit"
                 @cancel-order="openModalCancel"
             />
@@ -36,7 +36,7 @@
 import Main from '../../components/Main.vue';
 import Info from '../../components/Info.vue';
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { OrderStatus, type Order } from '@/types/interfaces/Orders';
 import { OrderService } from '@/service/OrdersService';
 import TablePedidos from './components/TablePedidos.vue';
@@ -49,6 +49,20 @@ import CancelOrderModal from './components/CancelOrderModal.vue';
 
     const loadOrders = ()=>{
         orders.value = OrderService.getAllOrders()
+    }
+
+    const filterStatus = ref<OrderStatus>(OrderStatus.PENDENTE)
+    
+    const ordersFilter = computed(()=>{
+        return orders.value.filter( o => o.status === filterStatus.value)
+    })
+
+    const setFilterPendentes = (): void => {
+        filterStatus.value = OrderStatus.PENDENTE
+    }
+
+    const setFilterFinalizados = (): void =>{
+        filterStatus.value= OrderStatus.FINALIZADO
     }
 
     onMounted(()=>{
@@ -72,28 +86,8 @@ import CancelOrderModal from './components/CancelOrderModal.vue';
         idSelected.value = id
     }
 
-    const filtrar = ref(false)
-
-    //para cada pedido pega os pendentes
-    const setFilter = ()=>{
-        orders.value = orders.value.filter((e) =>{
-            e.status === OrderStatus.PENDENTE
-        })
-        orders.value.forEach((e)=>{
-            console.log(e.status)
-        })
-    }
 </script>
 
 <style lang="scss">
-    .filtro-opt{
-        button{
-            background-color: aqua;
-            color:#fff;
-            border: solid 2px #fff;
-            &:hover{
-                background-color: rgb(4, 146, 146);
-            }
-        }
-    }
+    
 </style>

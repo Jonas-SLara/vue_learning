@@ -9,6 +9,7 @@
                 <th>Status</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </thead>
             <tbody>
                 <tr v-for="(order) in orders" :key="order.id">
@@ -36,7 +37,10 @@
                         </button>
                     </td>
                     <td>
-                        <button v-if="order.status===OrderStatus.PENDENTE">
+                        <button v-if="order.status===OrderStatus.PENDENTE"
+                            class="finish-btn"
+                            @click="finishOrder()"
+                        >
                             FINALIZAR
                         </button>
                     </td>
@@ -64,16 +68,10 @@ import { onMounted, ref } from 'vue';
         emit('edit-order', order)
     }
 
-    const filtroOption = ref<OrderStatus>()
-
-    const setFilter = ()=>{
+    const finishOrder = ()=>{
 
     }
 
-    //iniciar com filtro de pendentes
-    onMounted(()=>{
-        filtroOption.value = OrderStatus.PENDENTE
-    })
 </script>
 
 <style lang="css">
@@ -112,7 +110,7 @@ import { onMounted, ref } from 'vue';
     }
 
     button{
-        padding: 8px;
+        padding: 4px;
         border: none;
         border-radius: 8px;
         font-size: 1rem;
@@ -121,7 +119,6 @@ import { onMounted, ref } from 'vue';
 
     .edit-btn{
         background-color: #3ad8e3;
-        border: solid 2px #ffffff;
         color: #ffffff;
     }
 
@@ -135,5 +132,12 @@ import { onMounted, ref } from 'vue';
 
     .del-btn:hover{
         background-color: #d20000;
+    }
+
+    .finish-btn{
+        background-color: #33ff00;
+    }
+    .finish-btn:hover{
+        background-color: #22a900;
     }
 </style>

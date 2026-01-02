@@ -30,18 +30,6 @@
                     </select>
                 </div>
                 
-                <div>
-                    <label for="status">Status</label>
-                    <select id="status" v-model="form.status">
-                        <option 
-                            v-for="status in OrderListStatus"
-                            :key="status"
-                            :value="status"
-                        >
-                            {{ status }}
-                        </option>
-                    </select>
-                </div>
                 <button type="submit">Alterar</button>
 
             </form>
@@ -67,22 +55,19 @@ import { onMounted, reactive, ref, watch } from 'vue';
     const form = reactive<{
         pao: string
         carne: string
-        status: OrderStatus
     }>({
         pao: '',
-        carne: '',
-        status: OrderStatus.PENDENTE
+        carne: ''
     })
-
-    const OrderListStatus = Object.values(OrderStatus)
 
     watch(
         ()=>props.order,
+
         (newOrder) => {
             form.pao = newOrder.pao,
-            form.carne = newOrder.carne,
-            form.status = newOrder.status
+            form.carne = newOrder.carne
         },
+        
         {immediate: true}
     )
 

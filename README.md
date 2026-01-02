@@ -1,48 +1,74 @@
-# ./
+# X TUDO!
 
-This template should help get you started developing with Vue 3 in Vite.
+> aplicacao para pedir seu x e receber em seu endereco, além de funcionarios receberem os pedidos na lista e processa-los em cada unidade
 
-## Recommended IDE Setup
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Diagrama de classes de dominio
 
-## Recommended Browser Setup
+```mermaid
+classDiagram
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+class Usuario
+class Unidade
+class Endereco
+class Pedido
+class ItemPedido
+class IngredienteUnidade
+class Ingrediente
+class Entregador
 
-## Type Support for `.vue` Imports in TS
+%% Relações principais
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Usuario "1" --> "0..*" Pedido : realiza
 
-## Customize configuration
+Unidade "1" --> "0..*" Pedido : recebe
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Pedido "1" *-- "1..*" ItemPedido : compõe
 
-## Project Setup
+ItemPedido "0..*" --> "1" IngredienteUnidade : referencia
 
-```sh
-pnpm install
+IngredienteUnidade "0..*" --> "1" Ingrediente : ingrediente
+
+IngredienteUnidade "0..*" --> "1" Unidade : pertence
+
+Pedido "1" --> "1" Endereco : entrega_em
+
+Entregador "1" --> "0..*" Pedido : entrega
+
 ```
 
-### Compile and Hot-Reload for Development
+### Fluxo 1 (realização de pedido)
 
-```sh
-pnpm dev
+```mermaid
+flowchart TB
+    id1((inicio)) --> id2[escolher filial]
+    id2 --> id3{escolha}
+
+    id3 -- manual --> id4[/input: itens do pedido/]
+    id4 --> id5[ope: montar pedido<br/>+ calcular preço]
+    id5 --> id6{valido?}
+
+    id6 -- nao --> id4
+    id6 -- sim --> id7[mostrar pedido gerado]
+    id3 -- automatica no cardapio --> id7
+    id7 --> |salvar| id8[(db)]
+
 ```
 
-### Type-Check, Compile and Minify for Production
+### Fluxo 2 (gerenciamento de pedidos)
 
-```sh
-pnpm build
-```
+```mermaid
+flowchart TB
+    id1((inicio)) --> id2{escolher filtro: }
+    id2 -- PENDENTES --> id3[ver pedidos pendentes]
+    id2 -- FINALIZADOS --> id4[ver pedidos Finalizados]
 
-### Lint with [ESLint](https://eslint.org/)
+    id1 --> id5{gerar relatorio: }
+    id5 -- vendas --> id6[relatorio de vendas]
+    id5 -- gastos --> id7[relatorio de gastos]
 
-```sh
-pnpm lint
+    id3 --> id8{escolher: }
+    id8 -- Finalizar --> id9[finalizar pedido]
+    id8 -- Cancelar --> id10[cancelar Pedido]
+    id8 -- Editar --> id11[editar pedido]
 ```
