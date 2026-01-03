@@ -1,4 +1,4 @@
-import{ OrderStatus, type Order } from "@/types/interfaces/Orders";
+import{ OrderStatus, type Order } from "@/types/Orders";
 
 //chave para o localstorage
 const STORAGE_KEY = "orders"

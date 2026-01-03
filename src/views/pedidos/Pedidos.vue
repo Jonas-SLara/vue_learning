@@ -37,7 +37,7 @@ import Main from '../../components/Main.vue';
 import Info from '../../components/Info.vue';
 
 import { computed, onMounted, ref } from 'vue';
-import { OrderStatus, type Order } from '@/types/interfaces/Orders';
+import { OrderStatus, type Order } from '@/types/Orders';
 import { OrderService } from '@/service/OrdersService';
 import TablePedidos from './components/TablePedidos.vue';
 import EditOrderModal from './components/EditOrderModal.vue';

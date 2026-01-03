@@ -57,8 +57,8 @@
 <script setup lang="ts">
 import { getIngredients } from '@/service/IgredientsService';
 import { OrderService } from '@/service/OrdersService';
-import { IngredientType, type Ingrediente } from '@/types/interfaces/Ingredientes';
-import { OrderPriority, OrderStatus, type Order } from '@/types/interfaces/Orders';
+import { IngredientType, type Ingrediente } from '@/types/Ingredientes';
+import { OrderPriority, OrderStatus, type Order } from '@/types/Orders';
 
 import { onMounted, reactive, ref } from 'vue';
 

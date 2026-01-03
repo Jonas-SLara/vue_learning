@@ -1,4 +1,4 @@
-import type { Ingrediente } from "@/types/interfaces/Ingredientes"
+import type { Ingrediente } from "@/types/Ingredientes"
 
 const STORAGE_KEY = 'ingredientes'
 

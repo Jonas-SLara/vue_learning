@@ -1,32 +1,19 @@
 <template>
-  <header>
-      <div class="logo">
-        <img src="/src/assets/logo.svg" width="32px"/>
-      </div>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/pedidos">Pedidos</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Registrar</RouterLink>
-      </nav>
-  </header>
- 
   <RouterView />
-  <Footer></Footer>
 </template>
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Footer from './components/Footer.vue';
+import { IngredientType, type Ingrediente } from './types/Ingredientes';
 import { onMounted } from 'vue';
-import { IngredientType, type Ingrediente } from './types/interfaces/Ingredientes';
-
+import { UserRole, type Users } from './types/Users';
+import { UserServices } from './service/UsersServices';
 const STORAGE_KEY = 'ingredientes'
 
 onMounted(()=>{
-  alert("App")
   //caso ja tem local nao carrega os dados
   if(localStorage.getItem(STORAGE_KEY)) return
+  
   //inicializa
   const ingredientes: Ingrediente[] = [
     {id: 1, name: 'Pão Francês', type: IngredientType.PAO},
@@ -37,10 +24,22 @@ onMounted(()=>{
     { id: 6, name: 'Bacon', type: IngredientType.OPCIONAL }
   ]
   localStorage.setItem(STORAGE_KEY, JSON.stringify(ingredientes))
+
+  const userAdmin: Users = {
+    name: "admin",
+    email: "admin@admin.com",
+    id: 0,
+    password: 'admin',
+    orders: [],
+    role: UserRole.ADMIN,
+  }
+
+  UserServices.register(userAdmin)
+
 })
 </script>
 
-<style lang="css">
+<style lang="scss">
 
   header{
     display: flex;
@@ -51,26 +50,27 @@ onMounted(()=>{
     width: 100%;
     min-height: 8vh;
     padding: 8px;
-  }
 
-  nav{
-    width: 30%;
-    display: flex;
-    justify-content: space-around;
-  }
+    nav{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      
+      a{
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #ff5521;
 
-  a{
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: #ff5521;
-  }
-  a:hover{
-    color: rgb(220, 255, 255);
-    text-decoration: underline;
+        &:hover{
+          color: rgb(220, 255, 255);
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   h1, h2, h3{
-    color: #ffffff;
+      color: #ffffff;
   }
 </style>

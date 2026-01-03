@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { OrderStatus, type Order } from '@/types/interfaces/Orders';
+import { OrderStatus, type Order } from '@/types/Orders';
 import { onMounted, ref } from 'vue';
 
     defineProps<{
